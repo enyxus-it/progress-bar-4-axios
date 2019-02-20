@@ -115,8 +115,13 @@ function loadProgressBar(config) {
 
   var setupStartProgress = function setupStartProgress() {
     instance.interceptors.request.use(function (config) {
-      requestsCounter++;
-      _nprogress2.default.start();
+      if (config && config.progress === false) {
+        config.onDownloadProgress = null;
+        config.onUploadProgress = null;
+      } else {
+        requestsCounter++;
+        _nprogress2.default.start();
+      }
       return config;
     });
   };
@@ -131,14 +136,14 @@ function loadProgressBar(config) {
 
   var setupStopProgress = function setupStopProgress() {
     var responseFunc = function responseFunc(response) {
-      if (--requestsCounter === 0) {
+      if ((!response || !response.config || !(response.config.progress === false)) && --requestsCounter === 0) {
         _nprogress2.default.done();
       }
       return response;
     };
 
     var errorFunc = function errorFunc(error) {
-      if (--requestsCounter === 0) {
+      if ((!error || !error.config || !(error.config.progress === false)) && --requestsCounter === 0) {
         _nprogress2.default.done();
       }
       return Promise.reject(error);
