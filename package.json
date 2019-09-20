@@ -1,6 +1,6 @@
 {
-  "name": "axios-progress-bar",
-  "version": "1.2.0",
+  "name": "x-axios-progress-bar",
+  "version": "1.2.1",
   "description": "Slim progress bar (NProgress) for Web applications that use Axios library for HTTP requests.",
   "main": "dist/index.js",
   "scripts": {
@@ -9,9 +9,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rikmms/progress-bar-4-axios.git"
+    "url": "https://github.com/mszkb/progress-bar-4-axios"
   },
-  "author": "rikmms <sousa.ricardo10@gmail.com>",
+  "author": "mszkb <mszkb@skca.eu>",
   "license": "MIT",
   "keywords": [
     "axios",
