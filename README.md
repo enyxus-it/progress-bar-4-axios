@@ -13,7 +13,7 @@ This module aims to provide a simple usage of a progress bar for the HTTP reques
 It's available through the NPM package:
 
     npm install --save axios
-    npm install --save axios-progress-bar
+    npm install --save x-axios-progress-bar
 
 Or via CDN:
 ```html
@@ -40,7 +40,7 @@ __Also, you need to import the CSS file ([nprogress.css](https://cdn.rawgit.com/
 
 #### Example in ES6 using the import statement
 ```js
-import { loadProgressBar } from 'axios-progress-bar'
+import { loadProgressBar } from 'x-axios-progress-bar'
 
 loadProgressBar()
 ...
@@ -50,7 +50,7 @@ Don't forget to import the CSS in the HTML, or through JavaScript with some modu
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/rikmms/progress-bar-4-axios/0a3acf92/dist/nprogress.css" />
 ```
 ```js
-import 'axios-progress-bar/dist/nprogress.css'
+import 'x-axios-progress-bar/dist/nprogress.css'
 ```
 
 #### Example using plain HTML and JavaScript in the Browser
