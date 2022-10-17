@@ -1,6 +1,6 @@
 {
   "name": "x-axios-progress-bar",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Slim progress bar (NProgress) for Web applications that use Axios library for HTTP requests.",
   "main": "dist/index.js",
   "scripts": {
