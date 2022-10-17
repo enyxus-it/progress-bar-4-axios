@@ -115,20 +115,22 @@ function loadProgressBar(config) {
 
   var setupStartProgress = function setupStartProgress() {
     instance.interceptors.request.use(function (config) {
+      requestsCounter++;
+
       if (config && config.progress === false) {
         config.onDownloadProgress = null;
         config.onUploadProgress = null;
       } else {
-        requestsCounter++;
         _nprogress2.default.start();
       }
+
       return config;
     });
   };
 
   var setupUpdateProgress = function setupUpdateProgress() {
-    var update = function update(e) {
-      return _nprogress2.default.inc(calculatePercentage(e.loaded, e.total));
+    var update = function update(event) {
+      return _nprogress2.default.inc(calculatePercentage(event.loaded, event.total));
     };
     instance.defaults.onDownloadProgress = update;
     instance.defaults.onUploadProgress = update;
@@ -136,16 +138,28 @@ function loadProgressBar(config) {
 
   var setupStopProgress = function setupStopProgress() {
     var responseFunc = function responseFunc(response) {
-      if ((!response || !response.config || !(response.config.progress === false)) && --requestsCounter === 0) {
+      --requestsCounter;
+      if (requestsCounter < 0) requestsCounter = 0;
+
+      var progress = response && response.config && response.config.progress;
+      if (progress !== false && requestsCounter <= 0) {
+        _nprogress2.default.inc(0.0);
         _nprogress2.default.done();
       }
+
       return response;
     };
 
     var errorFunc = function errorFunc(error) {
-      if ((!error || !error.config || !(error.config.progress === false)) && --requestsCounter === 0) {
+      --requestsCounter;
+      if (requestsCounter < 0) requestsCounter = 0;
+
+      var progress = error && error.config && error.config.progress;
+      if (requestsCounter <= 0 && progress !== false) {
+        _nprogress2.default.inc(0.0);
         _nprogress2.default.done();
       }
+
       return Promise.reject(error);
     };
 
